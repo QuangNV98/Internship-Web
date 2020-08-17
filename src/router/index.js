@@ -4,7 +4,10 @@ import DashboardLayout from "@/layout/DashboardLayout.vue"
 
 import Dashboard from "@/pages/Dashboard.vue"
 import TableList from "@/pages/TableList.vue"
+import UserProfile from "@/pages/UserProfile.vue"
 import NotFound from "@/pages/NotFoundPage.vue"
+import Company from "@/pages/admin/Company.vue"
+import Instructor from "@/pages/admin/Instructor.vue"
 
 Vue.use(VueRouter)
 
@@ -20,9 +23,31 @@ const routes = [
         component: Dashboard
       },
       {
+        path: "user",
+        name: "user",
+        component: UserProfile
+      },
+      {
         path: "table-list",
         name: "table-list",
         component: TableList
+      }
+    ]
+  },
+  {
+    path: "/admin",
+    component: DashboardLayout,
+    redirect: "/admin",
+    children: [
+      {
+        path: "company",
+        name: "company",
+        component: Company
+      },
+      {
+        path: "instructor",
+        name: "instructor",
+        component: Instructor
       }
     ]
   },
