@@ -5,12 +5,12 @@
 
         <div class="row">
           <div class="col-md-3">
-              <b-img v-bind="mainProps" rounded="circle" alt="https://i2.wp.com/www.omanobserver.om/wp-content/uploads/2018/11/Sea.jpg?fit=800%2C550&ssl=1"></b-img>
+              <!-- <b-img src="https://picsum.photos/1024/400/?image=41" fluid alt="Responsive image"></b-img> -->
           </div>
 
           <div class="col-md-9">
               <div class="row">
-                <div class="col-md-9">
+                <div class="col-md-8">
                   <fg-input type="text"
                             label="Full name:"
                             :disabled="true"
@@ -18,6 +18,16 @@
                             v-model="user.company">
                   </fg-input>
                 </div>
+
+                <div class="col-md-4">
+                    <fg-input type="text"
+                            label="Sex:"
+                            :disabled="true"
+                            placeholder="Paper dashboard"
+                            v-model="user.company">
+                  </fg-input>
+                </div>
+
               </div>
           </div>
         </div>
@@ -138,7 +148,7 @@ export default {
         postalCode: "",
         aboutMe: `We must accept finite disappointment, but hold on to infinite hope.`
       },
-      mainProps: { blank: true, blankColor: '#777', width: 75, height: 75, class: 'm1' }
+
     };
   },
   methods: {

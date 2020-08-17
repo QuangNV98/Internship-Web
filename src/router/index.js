@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import DashboardLayout from "@/layout/DashboardLayout.vue"
+import AdminLayout from "@/layout/AdminLayout.vue"
+import AdminDashboard from "@/pages/admin/AdminDashboard.vue"
 
 import Dashboard from "@/pages/Dashboard.vue"
 import TableList from "@/pages/TableList.vue"
@@ -36,9 +38,14 @@ const routes = [
   },
   {
     path: "/admin",
-    component: DashboardLayout,
-    redirect: "/admin",
+    component: AdminLayout,
+    redirect: "/admin/dashboard",
     children: [
+      {
+        path: "dashboard",
+        name: "dashboard",
+        component: AdminDashboard
+      },
       {
         path: "company",
         name: "company",
