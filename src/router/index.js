@@ -9,7 +9,7 @@ import TableList from "@/pages/client/TableList.vue"
 import UserProfile from "@/pages/client/UserProfile.vue"
 import NotFound from "@/pages/NotFoundPage.vue"
 import Company from "@/pages/admin/Company.vue"
-import Instructor from "@/pages/admin/Instructor.vue"
+import AdminUser from "@/pages/admin/AdminUser.vue"
 
 Vue.use(VueRouter)
 
@@ -52,9 +52,9 @@ const routes = [
         component: Company
       },
       {
-        path: "instructor",
-        name: "instructor",
-        component: Instructor
+        path: "users",
+        name: "users",
+        component: AdminUser
       }
     ]
   },
