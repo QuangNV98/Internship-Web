@@ -33,7 +33,7 @@
                 <div class="form-group">
                   <label class="control-label">Sex</label>
                   <b-form-radio-group
-                    v-model="selected"
+                    v-model="user.sex"
                     :options="options"
                     class="mb-3"
                     value-field="item"
@@ -86,7 +86,6 @@
                     ></b-form-datepicker>
                   </b-input-group-append>
                 </b-input-group>
-        
               </div>
             </div>
           </div>
@@ -94,33 +93,35 @@
 
         <div class="row">
           <div class="col-md-4">
-            <fg-input
-              type="text"
-              label="City"
-              :disabled="true"
-              placeholder="Paper dashboard"
+            <label for="control-label">City</label>
+            <b-form-select
               v-model="user.city"
-            ></fg-input>
+              @change="chooseCity($event)"
+              :options="allCities"
+              value-field="ID"
+              text-field="Title"
+            ></b-form-select>
           </div>
 
           <div class="col-md-4">
-            <fg-input
-              type="text"
-              label="District"
-              :disabled="true"
-              placeholder="Paper dashboard"
+            <label for="control-label">District</label>
+            <b-form-select
               v-model="user.district"
-            ></fg-input>
+              @change="chooseDistrict($event)"
+              :options="allDistricts"
+              value-field="ID"
+              text-field="Title"
+            ></b-form-select>
           </div>
 
           <div class="col-md-4">
-            <fg-input
-              type="text"
-              label="Ward"
-              :disabled="true"
-              placeholder="Paper dashboard"
+            <label for="control-label">Ward</label>
+            <b-form-select
               v-model="user.ward"
-            ></fg-input>
+              :options="allWards"
+              value-field="ID"
+              text-field="Title"
+            ></b-form-select>
           </div>
         </div>
 
@@ -174,6 +175,7 @@
   </card>
 </template>
 <script>
+import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -181,7 +183,7 @@ export default {
         id: "",
         code: "B16DCCN288",
         name: "Nguyen Van Quang",
-        dob: "30/07/1998",
+        dob: "",
         sex: 1,
         username: "B16DCCN288",
         password: "pass",
@@ -189,15 +191,15 @@ export default {
         tel: "0915997460",
         img_seq: "",
         mail: "quangoc98@gmail.com",
-        city: "",
-        district: "",
-        ward: "",
+        city: 64,
+        district: null,
+        ward: null,
         desc: `We must accept finite disappointment, but hold on to infinite hope.`,
       },
       selected: "A",
       options: [
-        { item: "A", name: "Male" },
-        { item: "B", name: "Female" },
+        { item: 1, name: "Male" },
+        { item: 0, name: "Female" },
       ],
       mainProps: {
         blank: true,
@@ -209,12 +211,23 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["fetchCities", "fetchDistrictsByCity", "fetchWards"]),
     updateProfile() {
-      alert("Your data: " + JSON.stringify(this.user));
+      console.log("Your data: " + JSON.stringify(this.user));
     },
     onContext(ctx) {
-      this.user.dob = ctx.selectedYMD
-    }
+      this.user.dob = ctx.selectedYMD;
+    },
+    chooseCity(idCity) {
+      this.fetchDistrictsByCity(idCity);
+    },
+    chooseDistrict(idDistrict) {
+      this.fetchWards(idDistrict);
+    },
+  },
+  computed: mapGetters(["allCities", "allDistricts", "allWards"]),
+  created() {
+    this.fetchCities();
   },
 };
 </script>
